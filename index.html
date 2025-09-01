@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>इंसान अनुवादित हिन्दू</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', sans-serif;
+            background: #ffffff;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 20px;
+            background: linear-gradient(90deg, #673ab7, #512da8);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .title {
+            font-size: 20px;
+            font-weight: bold;
+            animation: colorchange 8s infinite alternate;
+        }
+
+        @keyframes colorchange {
+            0% {
+                color: #fff;
+            }
+
+            50% {
+                color: #ffeb3b;
+            }
+
+            100% {
+                color: #fff;
+            }
+        }
+
+        .navbar-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .btn {
+            background: #ff9800;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .btn:hover {
+            transform: scale(1.1);
+        }
+
+        /* Reader Count */
+        #readerCount {
+            font-size: 16px;
+            font-weight: bold;
+            animation: pulse 2s infinite;
+            cursor: pointer;
+        }
+
+        @keyframes pulse {
+            0% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+
+            50% {
+                text-shadow: 0 0 15px rgba(255, 255, 255, 1);
+            }
+
+            100% {
+                text-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+            }
+        }
+
+        /* Scrolling Banner */
+        .scroll-banner {
+            position: relative;
+            width: 100%;
+            background: #ff4081;
+            color: white;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px 0;
+        }
+
+        .scroll-text {
+            display: inline-block;
+            padding-left: 100%;
+            animation: scroll-left 25s linear infinite;
+            font-weight: bold;
+            font-size: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+            color: white;
+        }
+
+        .scroll-text span {
+            margin-right: 950px;
+        }
+
+        @keyframes scroll-left {
+            0% {
+                transform: translateX(0);
+            }
+
+            100% {
+                transform: translateX(-100%);
+            }
+        }
+
+        /* Page Navigation */
+        .page-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 10px;
+            background: #f4f4f4;
+            overflow-x: hidden;
+        }
+
+        .page-buttons-container {
+            display: flex;
+            overflow-x: auto;
+            gap: 5px;
+            padding: 5px 0;
+            scroll-behavior: smooth;
+        }
+
+        .page-buttons-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .page-buttons-container {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .page-btn {
+            flex: 0 0 auto;
+            padding: 8px 14px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background: #e0e0e0;
+            cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s, background 0.3s, color 0.3s, box-shadow 0.3s;
+        }
+
+        .page-btn:hover {
+            transform: scale(1.1);
+            background: #673ab7;
+            color: white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .page-btn.active {
+            background: linear-gradient(90deg, #ff4081, #ff80ab);
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        #prevBtn,
+        #nextBtn {
+            background: #ff9800;
+            color: white;
+            border-radius: 8px;
+        }
+
+        #prevBtn:hover,
+        #nextBtn:hover {
+            background: #e65100;
+        }
+
+        @media (max-width: 600px) {
+            .page-btn {
+                padding: 6px 10px;
+                font-size: 14px;
+            }
+        }
+
+        /* PDF Viewer */
+        #pdfFrame {
+            width: 100%;
+            height: 70vh;
+            border: none;
+            display: block;
+            opacity: 0;
+            transition: opacity 0.6s ease;
+        }
+
+        #pdfFrame.loaded {
+            opacity: 1;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 15px;
+            background: #673ab7;
+            color: white;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="title">इंसान अनुवादित हिन्दू</div>
+        <div class="navbar-right">
+            <div id="readerCount">Readers: 0</div>
+            <button class="btn" onclick="window.location.href='index.html'">Go Back</button>
+            <button class="btn" onclick="window.location.href='all.pdf'">Download</button>
+        </div>
+    </div>
+
+    <!-- Scrolling Banner -->
+    <div class="scroll-banner">
+        <div class="scroll-text">
+            <span>📢 Share us with your friends to read this edition before 6am 📢</span>
+            <span>📢 Share us with your friends to read this edition before 6am 📢</span>
+        </div>
+    </div>
+
+    <!-- Page Navigation -->
+    <div class="page-nav">
+        <button class="page-btn" id="prevBtn">⬅ Prev</button>
+        <div id="pageButtons" class="page-buttons-container"></div>
+        <button class="page-btn" id="nextBtn">Next ➡</button>
+    </div>
+
+    <!-- PDF Viewer -->
+    <iframe id="pdfFrame"></iframe>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2025 Human Translated Hindu | Made with ❤️ for readers
+    </footer>
+
+    <script>
+        // Reader Count Animation
+        const readerCount = document.getElementById("readerCount");
+        let count = 0;
+        const target = 20;
+        const interval = setInterval(() => {
+            if (count < target) {
+                count++;
+                readerCount.textContent = "Readers: " + count;
+            } else {
+                clearInterval(interval);
+            }
+        }, 100);
+
+        // PDF Pages
+        const pdfFrame = document.getElementById("pdfFrame");
+        const pageButtonsContainer = document.getElementById("pageButtons");
+        const totalPages = 30;
+        let currentPage = 1;
+
+        function loadPDF(page) {
+            pdfFrame.classList.remove("loaded");
+            pdfFrame.src = page + ".pdf";
+        }
+
+        pdfFrame.onload = () => {
+            pdfFrame.classList.add("loaded");
+        };
+
+        // Create page buttons dynamically
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement("button");
+            btn.textContent = i;
+            btn.classList.add("page-btn");
+            if (i === 1) btn.classList.add("active");
+            btn.addEventListener("click", () => {
+                document.querySelectorAll(".page-btn").forEach(b => b.classList.remove("active"));
+                btn.classList.add("active");
+                currentPage = i;
+                loadPDF(i);
+                btn.scrollIntoView({ behavior: 'smooth', inline: 'center' });
+            });
+            pageButtonsContainer.appendChild(btn);
+        }
+
+        // Prev/Next buttons
+        document.getElementById("prevBtn").addEventListener("click", () => {
+            if (currentPage > 1) {
+                currentPage--;
+                document.querySelectorAll(".page-btn")[currentPage - 1].click();
+            }
+        });
+
+        document.getElementById("nextBtn").addEventListener("click", () => {
+            if (currentPage < totalPages) {
+                currentPage++;
+                document.querySelectorAll(".page-btn")[currentPage - 1].click();
+            }
+        });
+
+        // Initial load
+        loadPDF(currentPage);
+    </script>
+
+</body>
+
+</html>
